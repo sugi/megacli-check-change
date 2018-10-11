@@ -1,0 +1,12 @@
+# Source this file from scripts uses megacli
+MEGACLI=""
+for p in /usr/local/sbin/megacli /usr/local/sbin/MegaCli /usr/sbin/megacli /usr/sbin/MegaCli /sbin/megacli /sbin/MegaCli; do
+  test -x "$p" || continue
+  MEGACLI="$p"
+  break
+done
+
+if [ -z "${MEGACLI}" ]; then
+  echo "[FATAL] $0: megacli command is not found." >&2
+  exit 255
+fi

@@ -1,0 +1,6 @@
+megacli-check-change (0.1) unstable; urgency=medium
+
+  * Initial Release.
+  * Split package from megacli binary.
+
+ -- Tatsuki Sugiura <sugi@nemui.org>  Thu, 11 Oct 2018 16:19:05 +0900

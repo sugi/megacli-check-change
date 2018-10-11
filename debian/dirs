@@ -1,0 +1,3 @@
+var/lib/megacli-check-change
+etc/megacli-check-change
+usr/sbin

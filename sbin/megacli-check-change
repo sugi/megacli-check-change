@@ -1,0 +1,51 @@
+#!/bin/bash
+
+host=`hostname`
+statusdir=/var/lib/megacli-check-change
+statuscmd=/etc/megacli-check-change/get-status.cmd
+workdir=`mktemp -d /tmp/megacli-check-change.XXXXXXXXXX`
+firstrun=no
+trap "cd /; rm -rf -- '$workdir'" EXIT
+
+if [ -f "$statusdir/status.current" ]; then
+  mv "$statusdir/status.current" "$statusdir/status.old"
+else
+  firstrun="yes"
+fi
+
+cd "$workdir"
+${statuscmd} > status.out
+ec="$?"
+if [ "$ec" -ne 0 ]; then
+  echo "[WARN] $0: status check command (${statuscmd}) exit with error ($ec)." >&2
+fi
+if [ ! -s status.out ]; then
+  echo "[ERROR] $0: No output by status check command (${statuscmd})." >&2
+  exit 1
+fi
+
+mv status.out "$statusdir/status.current"
+
+test "$firstrun" = "yes" && exit 0
+
+diff=$(diff -u "$statusdir/status.old" "$statusdir/status.current" || true)
+
+test -z "$diff" && exit 0
+
+echo "$(/etc/megacli-check-change/mail-header.cmd)
+
+RAID status has been changed.
+Confirm your volume health status on $host!
+
+====> Diff of status:
+
+$diff
+
+====> Current status:
+
+$(cat "$statusdir/status.current")
+
+====> Recent logs:
+
+$(/etc/megacli-check-change/recent-logs.cmd)
+" | /usr/sbin/sendmail -t

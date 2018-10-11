@@ -1,0 +1,13 @@
+The Debian Package megacli-check-change
+----------------------------
+
+This package set cron job to check megacli RAID status and
+ will send mail report on any changes.
+
+"megacli" command is required.
+It can be downloaded from official driver site or get packaged version
+from http://hwraid.le-vert.net/ .
+
+You need to install megacli command into /usr/sbin or /usr/local/sbin.
+
+ -- Tatsuki Sugiura <sugi@nemui.org>  Thu, 11 Oct 2018 23:47:05 +0900

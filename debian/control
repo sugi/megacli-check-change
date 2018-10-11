@@ -1,0 +1,20 @@
+Source: megacli-check-change
+Section: admin
+Priority: optional
+Maintainer: Tatsuki Sugiura <sugi@nemui.org>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+#Homepage: <insert the upstream URL, if relevant>
+#Vcs-Browser: https://salsa.debian.org/debian/megacli-check-change
+#Vcs-Git: https://salsa.debian.org/debian/megacli-check-change.git
+
+Package: megacli-check-change
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: megacli
+Description: Check megacli status and report on any changes
+ This package set cron job to check megacli RAID status and
+ will send mail report on any changes.
+ .
+ "megacli" command is required. It can be downloaded from official
+ driver site or get packaged version on http://hwraid.le-vert.net/ .

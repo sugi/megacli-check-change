@@ -1,0 +1,14 @@
+*.bak
+*.old
+*.bak
+*.rej
+*.orig
+*~
+.*.sw[po]
+
+/debian/.debhelper/
+/debian/*-stamp
+/debian/files
+/debian/*.substvars
+/debian/tmp
+/debian/megacli-check-change
